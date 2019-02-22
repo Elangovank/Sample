@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="15dp"
+    tools:context=".activities.MainActivity">
+
+    <EditText
+        android:id="@+id/username"
+        style="@style/edittext_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:hint="Email id"
+        android:text="e@gmail.com" />
+
+    <EditText
+        android:id="@+id/password"
+        style="@style/edittext_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/username"
+        android:layout_marginTop="@dimen/margin_10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:text="1" />
+
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/password"
+        android:layout_alignParentRight="true"
+        android:text="I am Admin" />
+
+    <Button
+        android:id="@+id/btn_login"
+        style="@style/button_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/checkbox"
+        android:layout_marginTop="@dimen/margin_30"
+        android:text="Login" />
+
+    <Button
+        android:id="@+id/btn_signup"
+        style="@style/button_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+
+        android:text="Signup" />
+</RelativeLayout>

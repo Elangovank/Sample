@@ -3,16 +3,14 @@ package com.i.sample.activities;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.i.sample.R;
 import com.i.sample.database.AppDatabase;
 import com.i.sample.database.models.Category;
-
-import java.util.List;
 
 public class AddCategoryActivity extends AppCompatActivity {
 
@@ -49,11 +47,13 @@ public class AddCategoryActivity extends AppCompatActivity {
                 Category aCategory = new Category();
                 aCategory.name = name;
                 myAppDatabase.CategoryDao().insertCategory(aCategory);
-                List<String> aString = myAppDatabase.CategoryDao().getCategoryNameList();
+                Printmsg("Category added");
+                mCategoryEdit.setText("");
+               /* List<String> aString = myAppDatabase.CategoryDao().getCategoryNameList();
                 for (int i = 0; i < aString.size(); i++) {
                     Log.d(TAG, "addCategory: " + aString.get(i));
-                }
-              //  Log.d(TAG, "addCategory: " + myAppDatabase.CategoryDao().getCategoryNameList().size());
+                }*/
+                //  Log.d(TAG, "addCategory: " + myAppDatabase.CategoryDao().getCategoryNameList().size());
             }
         }
     }
@@ -63,6 +63,10 @@ public class AddCategoryActivity extends AppCompatActivity {
         myAppDatabase = AppDatabase.getDatabase(mContext);
         mCategoryEdit = findViewById(R.id.category);
         mSubmit = findViewById(R.id.btn_submit);
+    }
+
+    private void Printmsg(String msg) {
+        Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
     }
 
     private String getEditTextString(EditText aEdit) {

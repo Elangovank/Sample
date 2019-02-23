@@ -22,7 +22,7 @@ public class Results implements Serializable {
 
     @ColumnInfo(name = "userName")
     @NonNull
-    public int userName;
+    public String userName;
 
     @ColumnInfo(name = "categoryname")
     @NonNull

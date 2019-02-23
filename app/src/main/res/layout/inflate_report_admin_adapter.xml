@@ -27,9 +27,16 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginLeft="15dp"
                 android:orientation="vertical">
-
                 <TextView
-                    android:id="@+id/txt_title"
+                    android:id="@+id/username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/sf_pro_text_regular"
+                    android:maxLines="1"
+                    android:textSize="14sp"
+                    android:textStyle="normal" />
+                <TextView
+                    android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/sf_pro_text_regular"
@@ -44,8 +51,7 @@
                     android:layout_marginTop="@dimen/margin_5"
                     android:fontFamily="@font/sf_pro_text_regular"
                     android:maxLines="1"
-
-                    android:textSize="@dimen/font_12" />
+                    android:textSize="@dimen/font_18" />
             </LinearLayout>
 
         </LinearLayout>

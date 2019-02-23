@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.i.sample.Prefs;
 import com.i.sample.R;
 
 public class UserDashBoardActivity extends AppCompatActivity {
@@ -25,7 +26,22 @@ public class UserDashBoardActivity extends AppCompatActivity {
         mTakeQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(UserDashBoardActivity.this,SelectCategoryActivity.class));
+                startActivity(new Intent(UserDashBoardActivity.this, SelectCategoryActivity.class));
+            }
+        });
+
+        mReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(UserDashBoardActivity.this, UserReportActivity.class));
+            }
+        });
+
+        mLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Prefs.putObject("user_details", "null");
+                startActivity(new Intent(UserDashBoardActivity.this, MainActivity.class));
             }
         });
     }

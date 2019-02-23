@@ -14,8 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
-        android:hint="Email id"
-        android:text="e@gmail.com" />
+        android:hint="Email id" />
 
     <EditText
         android:id="@+id/password"
@@ -26,7 +25,7 @@
         android:layout_marginTop="@dimen/margin_10"
         android:hint="Password"
         android:inputType="textPassword"
-        android:text="1" />
+        />
 
     <CheckBox
         android:id="@+id/checkbox"

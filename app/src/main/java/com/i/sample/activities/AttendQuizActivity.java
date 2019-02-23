@@ -12,17 +12,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.i.sample.Prefs;
 import com.i.sample.R;
 import com.i.sample.database.AppDatabase;
 import com.i.sample.database.models.Questions;
 import com.i.sample.database.models.Results;
+import com.i.sample.database.models.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AttendQuizActivity extends AppCompatActivity {
     String TAG = AttendQuizActivity.this.toString();
-    TextView mQuestionText;
+    TextView mQuestionText, mQuestionNoTxt;
 
     CheckBox mOptionA, mOptionB, mOptionC, mOptionD;
 
@@ -32,7 +34,7 @@ public class AttendQuizActivity extends AppCompatActivity {
     List<Questions> mQuestions;
     int NoOfQuestionAttended = 0;
     int NoOfCorrectAnswered = 0;
-    String mCategoryName= "";
+    String mCategoryName = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,9 @@ public class AttendQuizActivity extends AppCompatActivity {
 
     public void setQuestion() {
         if (mQuestions.size() > NoOfQuestionAttended) {
+            int i = NoOfQuestionAttended;
+            i++;
+            mQuestionNoTxt.setText("Question No : "+i );
             mQuestionText.setText(mQuestions.get(NoOfQuestionAttended).question);
             mOptionA.setChecked(false);
             mOptionB.setChecked(false);
@@ -131,17 +136,18 @@ public class AttendQuizActivity extends AppCompatActivity {
                     return;
                 }
                 if (NoOfQuestionAttended >= 9) {
+                    User myUserDetail = Prefs.getObject("user_details", User.class);
                     Results aResult = new Results();
 
-                    aResult.categoryname = "";
+                    aResult.categoryname = mCategoryName;
                     aResult.noofCorrectAnswer = NoOfCorrectAnswered + "";
                     aResult.noofquestions = NoOfQuestionAttended + "";
-                    aResult.userId = 0;
-                    aResult.status = "";
-
-
+                    aResult.userId = myUserDetail.id;
+                    aResult.status = "1";
+                    aResult.userName = myUserDetail.name;
                     myAppDatabase.ResultDao().insert(aResult);
                     Intent i = new Intent(AttendQuizActivity.this, ResultDashBoardActivity.class);
+                    NoOfQuestionAttended++;
                     i.putExtra("result", NoOfCorrectAnswered + " / " + NoOfQuestionAttended);
                     startActivity(i);
                     finish();
@@ -162,6 +168,7 @@ public class AttendQuizActivity extends AppCompatActivity {
             mQuestions = new ArrayList<>();
             myAppDatabase = AppDatabase.getDatabase(mContext);
             mQuestionText = findViewById(R.id.question);
+            mQuestionNoTxt = findViewById(R.id.question_no);
             mSubmit = findViewById(R.id.btn_submit);
             mOptionA = findViewById(R.id.answer_a);
             mOptionB = findViewById(R.id.answer_b);

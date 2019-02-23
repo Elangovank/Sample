@@ -1,12 +1,14 @@
 package com.i.sample.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.i.sample.R;
 import com.i.sample.database.AppDatabase;
@@ -33,8 +35,8 @@ public class SignupActivity extends AppCompatActivity {
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
+                startActivity(new Intent(SignupActivity.this, MainActivity.class));
+                finish();
             }
         });
 
@@ -48,16 +50,22 @@ public class SignupActivity extends AppCompatActivity {
 
     private void validate() {
         if (getEditTextString(mUsernameEdt).length() == 0) {
+            Printmsg("Please enter user name");
             return;
         } else if (getEditTextString(mPasswordEdt).length() == 0) {
+            Printmsg("Please enter password");
             return;
         } else if (getEditTextString(mConPasswordEdt).length() == 0) {
+            Printmsg("Please enter confirm password");
             return;
         } else if (!isValidMobile(getEditTextString(mMobileEdt))) {
+            Printmsg("Please enter valid mobile number");
             return;
         } else if (!isValidMail(getEditTextString(mEmailEdt))) {
+            Printmsg("Please enter valid email id");
             return;
         } else if (!(getEditTextString(mPasswordEdt).equals(getEditTextString(mConPasswordEdt)))) {
+            Printmsg("Password not match !!!");
             return;
         } else {
             User aUser = new User();
@@ -66,9 +74,10 @@ public class SignupActivity extends AppCompatActivity {
             aUser.email = getEditTextString(mEmailEdt);
             aUser.password = getEditTextString(mPasswordEdt);
             myAppDatabase.UserDao().insert(aUser);
+            Printmsg("User created Successfully");
+            startActivity(new Intent(SignupActivity.this, MainActivity.class));
+            finish();
         }
-
-
     }
 
     private boolean isValidMail(String email) {
@@ -96,4 +105,8 @@ public class SignupActivity extends AppCompatActivity {
         return aEdit.getText().toString().trim();
     }
 
+
+    private void Printmsg(String msg) {
+        Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+    }
 }

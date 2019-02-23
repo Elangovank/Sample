@@ -20,5 +20,8 @@ public interface ResultDao {
     List<Results> getresult();
 
     @Query("select * from results where userId  = :userid ")
-    List<Results> getresultbyUser(String userid);
+    List<Results> getresultbyUser(int userid);
+
+    @Query("select * from results where categoryname  = :cat ")
+    List<Results> getresultbyCategory(String cat);
 }

@@ -10,7 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.i.sample.Prefs;
 import com.i.sample.R;
 import com.i.sample.database.AppDatabase;
 import com.i.sample.database.models.User;
@@ -53,8 +55,10 @@ public class MainActivity extends AppCompatActivity {
     private void validate() {
 
         if (getEditTextString(mUsernameEdt).length() == 0) {
+            Printmsg("Please enter User name");
             return;
         } else if (getEditTextString(mPasswordEdt).length() == 0) {
+            Printmsg("Please enter password");
             return;
         } else {
             if (mCheckbox.isChecked()) {
@@ -63,8 +67,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             } else {
                 User aUser = myAppDatabase.UserDao().getLoginUser(getEditTextString(mUsernameEdt), getEditTextString(mPasswordEdt));
-                if (aUser != null)
+                if (aUser != null) {
+                    Prefs.putObject("user_details", (User) aUser);
                     startActivity(new Intent(MainActivity.this, UserDashBoardActivity.class));
+                } else {
+                    Printmsg("Not a Valid user");
+                }
             }
         }
 
@@ -96,5 +104,10 @@ public class MainActivity extends AppCompatActivity {
     private String getEditTextString(EditText aEdit) {
         return aEdit.getText().toString().trim();
     }
+
+    private void Printmsg(String msg) {
+        Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+    }
+
 
 }

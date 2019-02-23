@@ -50,6 +50,9 @@
         <activity
             android:name=".activities.ReportActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.UserReportActivity"
+            android:screenOrientation="portrait" />
 
 
     </application>

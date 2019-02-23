@@ -5,7 +5,9 @@ import android.app.Application;
 import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.migration.Migration;
+import android.content.ContextWrapper;
 
+import com.i.sample.Prefs;
 import com.i.sample.database.AppDatabase;
 
 
@@ -27,7 +29,10 @@ public class AppController extends Application {
       super.onCreate();
       myInstance = this;
 
-
+      new Prefs.Builder().setContext(this)
+              .setMode(ContextWrapper.MODE_PRIVATE)
+              .setPrefsName(getPackageName())
+              .setUseDefaultSharedPreference(true).build();
       Room.databaseBuilder( this, AppDatabase.class, "sample_db" )
               .fallbackToDestructiveMigration()
               .build();
